@@ -1,3 +1,4 @@
+import React from 'react'
 import type { FC, ButtonHTMLAttributes } from 'react'
 import cn from 'clsx'
 
