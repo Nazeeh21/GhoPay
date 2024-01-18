@@ -13,6 +13,7 @@
   "dependencies": {
     "@acme/ui": "workspace:*",
     "@acme/utils": "workspace:*",
+    "@radix-ui/react-slot": "^1.0.2",
     "@vercel/examples-ui": "^1.0.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.1.1",
