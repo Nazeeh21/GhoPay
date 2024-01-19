@@ -29,6 +29,7 @@ interface TxnButtonProps<config extends Config = Config, context = unknown>
     config["chains"][number]["id"]
   >;
   useWriteContractArgs?: UseWriteContractParameters<config, context>;
+  buttonLabel?: string | React.ReactNode;
   children?: React.ReactNode | ((state: ContextType) => React.ReactNode);
 }
 
@@ -37,6 +38,7 @@ const TxnButton: React.FC<TxnButtonProps> = ({
   writeContractArgs,
   useWriteContractArgs,
   className,
+  buttonLabel,
   children,
   ...buttonProps
 }) => {
@@ -52,7 +54,7 @@ const TxnButton: React.FC<TxnButtonProps> = ({
       ? "Success"
       : returnData.isError
       ? "Error"
-      : "Transact";
+      : buttonLabel ?? "Transact";
 
   return (
     <TxnButtonContext.Provider value={returnData}>
