@@ -19,7 +19,7 @@ type ContextType<config extends Config = Config, context = unknown> = Omit<
 const TxnButtonContext = React.createContext<ContextType | null>(null);
 
 // interface defined to accept the arguments of useWriteContract and `writeContract` function as a prop
-interface TxnButtonProps<config extends Config = Config, context = unknown>
+export interface TxnButtonProps<config extends Config = Config, context = unknown>
   extends Omit<ButtonProps, "children"> {
   writeContractArgs: WriteContractVariables<
     Abi,
@@ -42,13 +42,11 @@ const TxnButton: React.FC<TxnButtonProps> = ({
   children,
   ...buttonProps
 }) => {
-  const { writeContract, ...returnData } =
+  const { writeContractAsync, ...returnData } =
     useWriteContract(useWriteContractArgs);
 
   const buttonText =
-    typeof children !== "function"
-      ? children
-      : returnData.isPending
+      returnData.isPending
       ? "Loading..."
       : returnData.isSuccess
       ? "Success"
@@ -56,12 +54,14 @@ const TxnButton: React.FC<TxnButtonProps> = ({
       ? "Error"
       : buttonLabel ?? "Transact";
 
+      console.log({buttonLabel, buttonText});
+
   return (
     <TxnButtonContext.Provider value={returnData}>
       <Button
         className={className}
-        disabled={!writeContract || returnData.isPending}
-        onClick={() => writeContract?.(writeContractArgs)}
+        disabled={!writeContractAsync || returnData.isPending}
+        onClick={() => writeContractAsync?.(writeContractArgs)}
         {...buttonProps}
       >
         {buttonText}

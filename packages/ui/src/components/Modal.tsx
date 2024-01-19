@@ -8,7 +8,7 @@ import { Address } from "viem";
 interface ModalProps {
   children?: React.ReactNode;
   amount: BigInt;
-  receiver: Address;
+  recipient: Address;
 }
 
 export function Modal({ children, ...props }: ModalProps) {
@@ -87,10 +87,7 @@ export function Modal({ children, ...props }: ModalProps) {
                         <div className="text-lg font-bold ">You will pay</div>
                         <div className="text-xl font-bold ">122 GHO</div>
                       </div>
-                      <ActionButtons
-                        amount={props.amount}
-                        spender={props.receiver}
-                      />
+                      <ActionButtons {...props} />
                     </div>
                     {children}
                   </div>

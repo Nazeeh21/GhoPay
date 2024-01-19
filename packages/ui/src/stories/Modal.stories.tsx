@@ -11,8 +11,8 @@ const Comp = () => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <Modal
-          amount={BigInt(1)}
-          receiver="0xcc626cE857cCb909427845aBA0c59445C75Ea5a2"
+          amount={BigInt(3)}
+          recipient="0xcc626cE857cCb909427845aBA0c59445C75Ea5a2"
         />
       </QueryClientProvider>
     </WagmiProvider>
