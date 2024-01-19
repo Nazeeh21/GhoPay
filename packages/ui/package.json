@@ -40,6 +40,7 @@
     "react-dom": "^17.0.0 || ^18.0.0-0"
   },
   "dependencies": {
+    "@bgd-labs/aave-address-book": "^2.17.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@radix-ui/react-slot": "^1.0.2",

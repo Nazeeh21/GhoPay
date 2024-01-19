@@ -43,13 +43,16 @@ const TxnButton: React.FC<TxnButtonProps> = ({
   const { writeContract, ...returnData } =
     useWriteContract(useWriteContractArgs);
 
-  const buttonText = returnData.isPending
-    ? "Loading..."
-    : returnData.isSuccess
-    ? "Success"
-    : returnData.isError
-    ? "Error"
-    : "Transact";
+  const buttonText =
+    typeof children !== "function"
+      ? children
+      : returnData.isPending
+      ? "Loading..."
+      : returnData.isSuccess
+      ? "Success"
+      : returnData.isError
+      ? "Error"
+      : "Transact";
 
   return (
     <TxnButtonContext.Provider value={returnData}>
@@ -61,7 +64,7 @@ const TxnButton: React.FC<TxnButtonProps> = ({
       >
         {buttonText}
       </Button>
-      {typeof children === "function" ? children(returnData) : children}
+      {typeof children === "function" && children(returnData)}
     </TxnButtonContext.Provider>
   );
 };

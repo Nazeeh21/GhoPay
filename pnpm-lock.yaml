@@ -84,6 +84,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@bgd-labs/aave-address-book':
+        specifier: ^2.17.0
+        version: 2.17.0
       '@headlessui/react':
         specifier: ^1.7.18
         version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
@@ -1588,6 +1591,10 @@ packages:
   /@base2/pretty-print-object@1.0.1:
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
     dev: true
+
+  /@bgd-labs/aave-address-book@2.17.0:
+    resolution: {integrity: sha512-JhKGyaCm6Qg+0jtX3UiNNi7c8+vYqFp8gbAsgMnxMZhDOEoNo4gPtiEq9M9rFl1PwjSEdMyzoRcP/nquFPC52g==}
+    dev: false
 
   /@coinbase/wallet-sdk@3.9.1:
     resolution: {integrity: sha512-cGUE8wm1/cMI8irRMVOqbFWYcnNugqCtuy2lnnHfgloBg+GRLs9RsrkOUDMdv/StfUeeKhCDyYudsXXvcL1xIA==}

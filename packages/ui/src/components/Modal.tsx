@@ -1,6 +1,8 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { TxnButton } from "../web3ui/TxnButton";
+import { ActionButtons } from "./ActionButtons/ActionButton";
 
 interface ModalProps {
   children?: React.ReactNode;
@@ -81,9 +83,10 @@ export function Modal({ children }: ModalProps) {
                         <div className="text-lg font-bold ">You will pay</div>
                         <div className="text-xl font-bold ">122 GHO</div>
                       </div>
-                      <button className="w-full p-2 text-white bg-gradient-to-r from-[#FC00FF] to-[#00DBDE] bg-gradient-to-r from-[#5C258D] to-[#4389A2] border border-[rgba(255,255,255,0.11)] rounded-[0.5625rem] shadow-[0px 1px 2px rgba(22,22,22,0.12)] transition-transform hover:scale-105">
+                      <ActionButtons />
+                      {/* <TxnButton className="w-full p-2 text-white bg-gradient-to-r from-[#FC00FF] to-[#00DBDE] bg-gradient-to-r from-[#5C258D] to-[#4389A2] border border-[rgba(255,255,255,0.11)] rounded-[0.5625rem] shadow-[0px 1px 2px rgba(22,22,22,0.12)] transition-transform hover:scale-105">
                         Buy using GHO
-                      </button>
+                      </TxnButton> */}
                     </div>
                     {children}
                   </div>
