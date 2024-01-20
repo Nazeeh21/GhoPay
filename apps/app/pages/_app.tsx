@@ -1,35 +1,23 @@
-import type { AppProps } from "next/app";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  WagmiProvider,
-  createConfig,
-  http,
-  useAccount,
-  useConnect,
-} from "wagmi";
-import { polygon, sepolia } from "viem/chains";
-import { injected, metaMask } from "wagmi/connectors";
 import { Layout } from "@components/layout";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { AppProps } from "next/app";
+import { WagmiConfig } from "wagmi";
+import { config } from "wagmiConfig";
 import "../styles/globals.css";
+import { ConnectKitProvider } from "connectkit";
 
-const config = createConfig({
-  chains: [polygon],
-  connectors: [injected(), metaMask()],
-  transports: {
-    [polygon.id]: http(),
-  },
-});
 const queryClient = new QueryClient();
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-
   return (
-      <WagmiProvider config={config}>
+    <WagmiConfig config={config}>
+      <ConnectKitProvider debugMode>
         <QueryClientProvider client={queryClient}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </QueryClientProvider>
-      </WagmiProvider>
+      </ConnectKitProvider>
+    </WagmiConfig>
   );
 }
