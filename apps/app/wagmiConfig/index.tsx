@@ -4,8 +4,8 @@ import { polygon } from "wagmi/chains";
 
 export const config = createConfig(getDefaultConfig({
   // Required API Keys
-  infuraId: process.env.NEXT_PUBLIC_INFURA_API_KEY!, // or infuraId
-  walletConnectProjectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID!,
+  infuraId: process.env.INFURA_ID!, // or infuraId
+  walletConnectProjectId: process.env.WALLET_CONNECT_PROJECT_ID!,
   chains: [polygon],
   appName: "GhoPay",
 }));
