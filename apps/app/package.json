@@ -14,7 +14,9 @@
     "@ghopay/ui": "workspace:*",
     "@ghopay/utils": "workspace:*",
     "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-query": "^5.17.15",
     "@vercel/examples-ui": "^1.0.4",
+    "@wagmi/core": "^2.2.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^1.1.1",
     "lucide-react": "^0.311.0",
@@ -22,7 +24,9 @@
     "react": "latest",
     "react-dom": "latest",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "viem": "2.x",
+    "wagmi": "^2.2.1"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
