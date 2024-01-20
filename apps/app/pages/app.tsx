@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
-import { Layout, Page, Text, List, Code } from "@vercel/examples-ui";
-import { Modal } from "@ghopay/ui";
 import { matchingTextColor, randomColor } from "@ghopay/utils";
+import { useEffect, useState } from "react";
 
-import { CardContent, Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function Index() {
   const [bgColor, setBgColor] = useState("");
@@ -83,5 +81,3 @@ export default function Index() {
     </div>
   );
 }
-
-Index.Layout = Layout;
