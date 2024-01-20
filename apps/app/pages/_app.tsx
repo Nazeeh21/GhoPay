@@ -1,7 +1,4 @@
 import type { AppProps } from "next/app";
-import type { LayoutProps } from "@vercel/examples-ui/layout";
-import { getLayout } from "@vercel/examples-ui";
-import "@vercel/examples-ui/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   WagmiProvider,
@@ -13,6 +10,7 @@ import {
 import { polygon, sepolia } from "viem/chains";
 import { injected, metaMask } from "wagmi/connectors";
 import { Layout } from "@components/layout";
+import "../styles/globals.css";
 
 const config = createConfig({
   chains: [polygon],

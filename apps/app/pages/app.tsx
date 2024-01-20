@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Layout, Page, Text, List, Code } from "@vercel/examples-ui";
 import { Modal } from "@ghopay/ui";
 import { matchingTextColor, randomColor } from "@ghopay/utils";
 
@@ -83,5 +82,3 @@ export default function Index() {
     </div>
   );
 }
-
-Index.Layout = Layout;
