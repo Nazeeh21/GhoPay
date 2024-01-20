@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { polygon, sepolia } from "viem/chains";
+import { goerli, polygon, sepolia } from "viem/chains";
 import {
   WagmiProvider,
   createConfig,
@@ -12,10 +12,10 @@ import { injected, metaMask } from "wagmi/connectors";
 import { Button } from "../shadcnComponents/ui/button";
 
 export const config = createConfig({
-  chains: [polygon],
+  chains: [goerli],
   connectors: [injected(), metaMask()],
   transports: {
-    [polygon.id]: http(),
+    [goerli.id]: http(),
   },
 });
 const queryClient = new QueryClient();

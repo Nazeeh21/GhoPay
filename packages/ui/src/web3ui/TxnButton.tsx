@@ -11,7 +11,7 @@ import { Abi } from "viem";
 import { Button, ButtonProps } from "../shadcnComponents/ui/button";
 
 // context type
-type ContextType<config extends Config = Config, context = unknown> = Omit<
+export type ContextType<config extends Config = Config, context = unknown> = Omit<
   UseWriteContractReturnType<config, context>,
   "writeContract" | "writeContractAsync"
 >;
@@ -19,8 +19,10 @@ type ContextType<config extends Config = Config, context = unknown> = Omit<
 const TxnButtonContext = React.createContext<ContextType | null>(null);
 
 // interface defined to accept the arguments of useWriteContract and `writeContract` function as a prop
-export interface TxnButtonProps<config extends Config = Config, context = unknown>
-  extends Omit<ButtonProps, "children"> {
+export interface TxnButtonProps<
+  config extends Config = Config,
+  context = unknown
+> extends Omit<ButtonProps, "children"> {
   writeContractArgs: WriteContractVariables<
     Abi,
     string,
@@ -31,6 +33,7 @@ export interface TxnButtonProps<config extends Config = Config, context = unknow
   useWriteContractArgs?: UseWriteContractParameters<config, context>;
   buttonLabel?: string | React.ReactNode;
   children?: React.ReactNode | ((state: ContextType) => React.ReactNode);
+  onSuccess?: (data?: ContextType) => void;
 }
 
 // TxnButton component
@@ -40,21 +43,26 @@ const TxnButton: React.FC<TxnButtonProps> = ({
   className,
   buttonLabel,
   children,
+  onSuccess,
   ...buttonProps
 }) => {
   const { writeContractAsync, ...returnData } =
     useWriteContract(useWriteContractArgs);
 
-  const buttonText =
-      returnData.isPending
-      ? "Loading..."
-      : returnData.isSuccess
-      ? "Success"
-      : returnData.isError
-      ? "Error"
-      : buttonLabel ?? "Transact";
+  React.useEffect(() => {
+    if (returnData.isSuccess) {
+      console.log("success: returning data");
+      onSuccess?.(returnData);
+    }
+  }, [returnData.isSuccess, onSuccess, returnData]);
 
-      console.log({buttonLabel, buttonText});
+  const buttonText = returnData.isPending
+    ? "Loading..."
+    : returnData.isSuccess
+    ? "Success"
+    : returnData.isError
+    ? "Error"
+    : buttonLabel ?? "Transact";
 
   return (
     <TxnButtonContext.Provider value={returnData}>
