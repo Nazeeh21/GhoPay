@@ -24,7 +24,7 @@ export default function Component() {
             Integration
           </Link>
           <Link
-             className="inline-flex h-9 items-center justify-center rounded-md bg-gradient-to-r from-green-400 to-blue-500 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50"
+             className="inline-flex h-9 items-center justify-center rounded-md bg-gradient-to-r from-green-400 to-blue-500 px-4 py-2 text-md font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50"
             href="/app"
           >
             Launch Dapp
@@ -46,7 +46,7 @@ export default function Component() {
               </div>
               <div className="space-x-4">
                 <Link
-                  className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-9 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-md font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50"
                   href="/app"
                 >
                   Get Started
