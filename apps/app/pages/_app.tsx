@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={config}>
-      <ConnectKitProvider debugMode>
+      <ConnectKitProvider theme="rounded" debugMode>
         <QueryClientProvider client={queryClient}>
           <Layout>
             <Component {...pageProps} />
