@@ -6,7 +6,7 @@ module.exports = {
     filename: 'main.js', // the output bundle file
     path: path.resolve(__dirname, 'dist'), // the output directory
     library: {
-      name: '@ghopay/ui', // replace with your library name
+      name: 'ghopay-sdk', // replace with your library name
       type: 'umd', // supports multiple module types
     },
     globalObject: 'this', // ensures the library works in node and browser
@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules|\.stories\.(js|jsx|tsx)$/,
       },
       {
         test: /\.css$/,

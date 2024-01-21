@@ -13,7 +13,7 @@ interface ButtonProps extends Pick<TxnButtonProps, "children" | "onSuccess"> {
   args: readonly unknown[] | undefined;
   buttonLabel?: string | React.ReactNode;
 }
-const ERC20_TOKEN_ADDRESS = "0xfA6209ccbE8402043b25682effCff36723692E96";
+const ERC20_TOKEN_ADDRESS = "0x5d00fab5f2F97C4D682C1053cDCAA59c2c37900D";
 
 const Button: React.FC<ButtonProps> = ({
   args,
@@ -129,8 +129,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   if (allowanceRequired <= 0) {
     return (
       <Button
-        functionName="transfer"
-        args={[recipient, amount]}
+        functionName="transferFrom"
+        args={[address, recipient, amount]}
         buttonLabel="Make Payment"
         onSuccess={() => {
           setTxnType("transferTxn");
