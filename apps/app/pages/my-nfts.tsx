@@ -12,8 +12,8 @@ export default function Component() {
   const [NFTsOwned, setNftsOwned] = useState<Array<Object>>();
 
   useEffect(() => {
+    setFetching(true);
     async function fetchData() {
-      setFetching(true);
       const response = await fetch(`/api/getNfts`, {
         method: "POST",
         headers: {
@@ -48,15 +48,15 @@ export default function Component() {
             Please switch to the correct network to view your NFTs.
           </p> */}
           <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {fetching
-              ? new Array(8)
+            {fetching? 
+            new Array(8)
                   .fill(0)
-                  .map((_, index) => (
+                  .map((_, index) => 
                     <Skeleton
-                      className=" border-2 h-60 bg-gray-100 border-gray-400 p-2 rounded-2xl"
+                      className="border-gray-400 border-2 h-60 bg-gray-100 p-2 rounded-2xl"
                       key={index}
                     />
-                  ))
+                  )
               : NFTsOwned?.map((nft: any, index: number) => (
                   <NftViewer
                     key={index}
