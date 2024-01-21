@@ -1,11 +1,11 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { TxnButton } from "../web3ui/TxnButton";
-import { ActionButtons } from "./ActionButtons/ActionButton";
+
 import { Address } from "viem";
 import { WagmiProvider, Config } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ActionButtons } from "./ActionButton";
 
 
 const queryClient = new QueryClient();

@@ -1,11 +1,12 @@
-import { getDefaultConfig } from "connectkit";
+import { http, injected,  } from "@wagmi/core";
+// import { getDefaultConfig } from "connectkit";
 import { createConfig } from "wagmi";
 import { goerli } from "wagmi/chains";
 
-export const config = createConfig(getDefaultConfig({
-  // Required API Keys
-  infuraId: process.env.INFURA_ID!, // or infuraId
-  walletConnectProjectId: process.env.WALLET_CONNECT_PROJECT_ID!,
+export const config = createConfig({
   chains: [goerli],
-  appName: "GhoPay",
-}));
+  connectors: [injected()],
+  transports: {
+    [goerli.id]: http(),
+  },
+});
