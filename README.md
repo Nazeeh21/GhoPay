@@ -2,6 +2,8 @@
 
 Sdk link: https://www.npmjs.com/package/ghopay-sdk
 
+Verified Contract: https://sepolia.etherscan.io/address/0x3e57d3c580d0437498215c7c2472b26d39a94c4b
+
 Gho-pay is a comprehensive SDK for interacting with the GHO Token on Ethereum's Sepolia network. It simplifies the process of token interactions such as approvals, transfers, and permits. The SDK is designed to be intuitive and efficient, catering to developers looking to integrate GHO Token transactions into their applications.
 
 ## Features
@@ -23,3 +25,8 @@ npm install ghopay-sdk
 ## Example
 
 A UI example is included in the SDK demonstrating the process of minting a crosschain NFT using GHO. It illustrates the integration of Chainlink price feeds and CCIP for a seamless minting experience on the Polygon Mumbai network with the transaction originating on the Ethereum Sepolia Network and paid for with GHO. 
+
+
+## Note
+
+Contracts are built off of Chainlink Cross Chain NFT example. The updated contract for the Gho Payment + NFT Mint can be found at the top of this readme or in the SourceMinter.Sol Contract in the Contracts directory. 
