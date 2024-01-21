@@ -7,8 +7,10 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import ghoAbi from "../@/lib/ghoABi.json";
+import contractAbi from "../@/lib/abi.json";
 import { TxnButton, TxnButtonProps } from "./TxnButton";
 import { CheckIcon } from "lucide-react";
+import { MAX_ALLOWANCE } from "@/lib/utils";
 
 interface ActionButtonsProps {
   recipient: Address;
@@ -36,8 +38,7 @@ export const TxnSuccess = () => (
   </div>
 );
 
-// const GHO_TOKEN_SEPOLIA_ADDRESS = "0x5d00fab5f2F97C4D682C1053cDCAA59c2c37900D";
-const GHO_TOKEN_SEPOLIA_ADDRESS = "0xB41aD4424a9ddB0D680b7aCB3493139742a1b953";
+const GHO_TOKEN_SEPOLIA_ADDRESS = "0x5d00fab5f2F97C4D682C1053cDCAA59c2c37900D";
 
 const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
   const [txnData, setTxnData] = useState<Hash>();
@@ -131,16 +132,16 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ recipient, amount }) => {
       {allowanceRequired <= 0 ? (
         <Button
           writeContractArgs={{
-            functionName: "transfer",
-            args: ["0xcc626cE857cCb909427845aBA0c59445C75Ea5a2", amount],
-            abi: erc20ABI,
+            // functionName: "transfer",
+            // args: ["0xcc626cE857cCb909427845aBA0c59445C75Ea5a2", amount],
+            abi: contractAbi as Abi,
             address: GHO_TOKEN_SEPOLIA_ADDRESS,
-            // functionName: "mint",
-            // args: [
-            //   "12532609583862916517",
-            //   "0xe54222F1220B0766e50eB156568798A7d046C8EC",
-            //   0,
-            // ],
+            functionName: "mint",
+            args: [
+              "12532609583862916517",
+              "0xe54222F1220B0766e50eB156568798A7d046C8EC",
+              0,
+            ],
           }}
           buttonLabel="Make Payment"
           onSuccess={() => {
@@ -164,7 +165,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ recipient, amount }) => {
             abi: ghoAbi as Abi,
             address: GHO_TOKEN_SEPOLIA_ADDRESS,
             functionName: "approve",
-            args: [recipient, amount],
+            args: [recipient, MAX_ALLOWANCE],
           }}
           buttonLabel="Approve GHO Tokens"
           onSuccess={async () => {
