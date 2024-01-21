@@ -1,19 +1,17 @@
-import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { Fragment, useRef, useState } from "react";
 
-import { Address } from "viem";
-import { WagmiProvider, Config } from "wagmi";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ActionButtons } from "./ActionButton";
 import { Button } from "@/components/ui/button";
+import { QueryClient } from "@tanstack/react-query";
+import { Address } from "viem";
+import { ActionButtons } from "./ActionButton";
 
 const queryClient = new QueryClient();
 interface ModalProps {
   children?: React.ReactNode;
   amount: BigInt;
   recipient: Address;
-  config: Config;
 }
 
 export function Modal({ children, ...props }: ModalProps) {
@@ -30,8 +28,6 @@ export function Modal({ children, ...props }: ModalProps) {
   };
 
   return (
-    <WagmiProvider config={props.config}>
-      <QueryClientProvider client={queryClient}>
         <div className="z-100 flex justify-center">
           <Button
             className="w-8/12  p-2 text-white bg-gradient-to-r from-[#FC00FF] to-[#00DBDE] bg-gradient-to-r from-[#5C258D] to-[#4389A2] border border-[rgba(255,255,255,0.11)] rounded-[0.5625rem] shadow-[0px 1px 2px rgba(22,22,22,0.12)] transition-transform hover:scale-105"
@@ -111,8 +107,6 @@ export function Modal({ children, ...props }: ModalProps) {
               </div>
             </Dialog>
           </Transition.Root>
-        </div>{" "}
-      </QueryClientProvider>
-    </WagmiProvider>
+        </div>
   );
 }
