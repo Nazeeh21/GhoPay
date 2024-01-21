@@ -4,7 +4,6 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { TxnButton } from "../web3ui/TxnButton";
 import { ActionButtons } from "./ActionButtons/ActionButton";
 import { Address } from "viem";
-import { WagmiProvider, Config } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
@@ -13,7 +12,6 @@ interface ModalProps {
   children?: React.ReactNode;
   amount: BigInt;
   recipient: Address;
-  config: Config
 }
 
 export function Modal({ children, ...props }: ModalProps) {
@@ -30,8 +28,6 @@ export function Modal({ children, ...props }: ModalProps) {
   };
 
   return (
-    <WagmiProvider config={props.config}>
-      <QueryClientProvider client={queryClient}>
         <div className="z-100">
           <button onClick={openModal}>Buy using GHO</button>
           <Transition.Root show={open} as={Fragment}>
@@ -106,8 +102,6 @@ export function Modal({ children, ...props }: ModalProps) {
               </div>
             </Dialog>
           </Transition.Root>
-        </div>{" "}
-      </QueryClientProvider>
-    </WagmiProvider>
+        </div>
   );
 }

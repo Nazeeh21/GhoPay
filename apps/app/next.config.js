@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@ghopay/ui"],
+  transpilePackages: ["ghopay-sdk"],
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if

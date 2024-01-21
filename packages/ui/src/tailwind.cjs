@@ -6,7 +6,7 @@ module.exports = {
   purge: {
     content: [
       path.join(
-        path.dirname(require.resolve("@ghopay/ui")),
+        path.dirname(require.resolve("ghopay-sdk")),
         "**/*.{js,ts,jsx,tsx}",
         "./stories/*.stories.tsx"
       ),
