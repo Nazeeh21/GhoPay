@@ -1,10 +1,14 @@
-import { Abi, Address, Hash } from "viem";
-import { erc20ABI, useAccount, useContractRead, useTransaction } from "wagmi";
 import { useEffect, useState } from "react";
-import { TxnButton, TxnButtonProps } from "./TxnButton";
-import abi from "../@/lib/abi.json";
+import { Abi, Address, Hash } from "viem";
+import {
+  erc20ABI,
+  useAccount,
+  useContractRead,
+  useWaitForTransaction,
+} from "wagmi";
 import ghoAbi from "../@/lib/ghoABi.json";
-import { MAX_ALLOWANCE } from "@/lib/utils";
+import { TxnButton, TxnButtonProps } from "./TxnButton";
+import { CheckIcon } from "lucide-react";
 
 interface ActionButtonsProps {
   recipient: Address;
@@ -16,8 +20,24 @@ interface ButtonProps
   buttonLabel?: string | React.ReactNode;
 }
 
+export const Spinner = () => (
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900 mx-auto" />
+    <p className="mt-4 text-center">Processing transaction...</p>
+  </div>
+);
+
+export const TxnSuccess = () => (
+  <div className=" flex items-center justify-center z-50">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+      <CheckIcon className="h-16 w-16 text-green-500 mx-auto" />
+      <p className="mt-4 text-center">Transaction successful!</p>
+    </div>
+  </div>
+);
+
 // const GHO_TOKEN_SEPOLIA_ADDRESS = "0x5d00fab5f2F97C4D682C1053cDCAA59c2c37900D";
-const GHO_TOKEN_SEPOLIA_ADDRESS = "0xfA6209ccbE8402043b25682effCff36723692E96";
+const GHO_TOKEN_SEPOLIA_ADDRESS = "0xB41aD4424a9ddB0D680b7aCB3493139742a1b953";
 
 const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
   const [txnData, setTxnData] = useState<Hash>();
@@ -31,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     status,
     isRefetching,
     error,
-  } = useTransaction({
+  } = useWaitForTransaction({
     hash: txnData ?? "0x0",
   });
 
@@ -42,7 +62,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     console.log({ isLoading });
     // (async () => {
     if (txnSuccess && !error) {
-     props.onSuccess?.();
+      props.onSuccess?.();
     }
     // })();
   }, [txnSuccess]);
@@ -57,8 +77,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     })();
   }, [txnData]);
 
-  if (isLoading && txnData)
-    return <div>Waiting for transaction to complete...</div>;
+  if (isLoading && txnData && !txnSuccess) return <Spinner />;
 
   return (
     <TxnButton
@@ -100,7 +119,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ recipient, amount }) => {
   console.log("allowance required", allowanceRequired);
 
   if (txnSuccess && txnType === "transferTxn") {
-    return <div>Payment Successful</div>;
+    return <TxnSuccess />;
   }
 
   if (isFetching || refetchingAllowance)
@@ -148,7 +167,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ recipient, amount }) => {
             args: [recipient, amount],
           }}
           buttonLabel="Approve GHO Tokens"
-          onSuccess={async() => {
+          onSuccess={async () => {
             setTxnType("approveTxn");
             setTxnSuccess(true);
             console.log("refetching allowance");

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useContractWrite } from "wagmi";
 import { Abi, Address } from "viem";
 import { Button, ButtonProps } from "@/components/ui/button";
+import { Spinner, TxnSuccess } from "./ActionButton";
 
 export interface TxnButtonProps extends Omit<ButtonProps, "children"> {
   writeContractArgs: {
@@ -44,6 +45,14 @@ const TxnButton: React.FC<TxnButtonProps> = ({
       onSuccess?.(data);
     }
   }, [isSuccess, onSuccess, status]);
+
+  if (isSuccess) {
+    return <TxnSuccess />;
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   const buttonText = isLoading
     ? "Loading..."

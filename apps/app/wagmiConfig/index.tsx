@@ -6,6 +6,6 @@ export const config = createConfig(getDefaultConfig({
   // Required API Keys
   infuraId: process.env.INFURA_ID!, // or infuraId
   walletConnectProjectId: process.env.WALLET_CONNECT_PROJECT_ID!,
-  chains: [goerli],
+  chains: [sepolia],
   appName: "GhoPay",
 }));
