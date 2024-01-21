@@ -1,12 +1,12 @@
-import { http, injected,  } from "@wagmi/core";
+import { http, injected, } from "@wagmi/core";
 // import { getDefaultConfig } from "connectkit";
 import { createConfig } from "wagmi";
-import { goerli } from "wagmi/chains";
+import { sepolia } from "wagmi/chains";
 
 export const config = createConfig({
-  chains: [goerli],
+  chains: [sepolia],
   connectors: [injected()],
   transports: {
-    [goerli.id]: http(),
+    [sepolia.id]: http(),
   },
 });
