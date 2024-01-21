@@ -4,6 +4,8 @@ Sdk link: https://www.npmjs.com/package/ghopay-sdk
 
 Verified Contract: https://sepolia.etherscan.io/address/0x3e57d3c580d0437498215c7c2472b26d39a94c4b
 
+Slide Deck: https://www.beautiful.ai/player/-NoegeOQkRihTM-KlGES
+
 Gho-pay is a comprehensive SDK for interacting with the GHO Token on Ethereum's Sepolia network. It simplifies the process of token interactions such as approvals, transfers, and permits. The SDK is designed to be intuitive and efficient, catering to developers looking to integrate GHO Token transactions into their applications.
 
 ## Features
