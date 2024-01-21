@@ -24,10 +24,13 @@
     "next": "canary",
     "react": "latest",
     "react-dom": "latest",
+    "@bgd-labs/aave-address-book": "^2.17.0",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "~1.21.4",
-    "wagmi": "^1.4.13"
+    "viem": "2.x",
+    "wagmi": "^2.2.1"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

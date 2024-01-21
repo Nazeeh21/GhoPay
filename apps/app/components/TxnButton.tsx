@@ -8,7 +8,7 @@ import { WriteContractVariables } from "wagmi/query";
 
 import type { Config } from "@wagmi/core";
 import { Abi } from "viem";
-import { Button, ButtonProps } from "../shadcnComponents/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 
 // context type
 export type ContextType<config extends Config = Config, context = unknown> = Omit<

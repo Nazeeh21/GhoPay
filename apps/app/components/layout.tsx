@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/router";
-import { ConnectKitButton } from "connectkit";
+// import { ConnectKitButton } from "connectkit";
 
 interface LayoutProps {
   children: ReactNode;
@@ -21,7 +21,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <span className="sr-only">GhoPay</span>
           </Link>
           <div className="ml-auto">
-            <ConnectKitButton />
+            {/* <ConnectKitButton /> */}
           </div>
         </header>
       )}

@@ -1,7 +1,8 @@
 import { Address, erc20Abi } from "viem";
-import { ContextType, TxnButton, TxnButtonProps } from "../../web3ui/TxnButton";
+
 import { useAccount, useReadContract, useTransaction } from "wagmi";
 import { useEffect, useState } from "react";
+import { ContextType, TxnButton, TxnButtonProps } from "./TxnButton";
 
 interface ActionButtonsProps {
   recipient: Address;
