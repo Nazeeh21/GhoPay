@@ -48,7 +48,7 @@ const IPFSDataViewer = ({ ipfsHash }: { ipfsHash: string }) => {
             </p>
            <div className="mt-3">
            <Modal
-              amount={BigInt(12)}
+              amount={BigInt(1200)}
               recipient="0x3e57d3c580d0437498215c7C2472B26d39a94C4B"
             />
            </div>

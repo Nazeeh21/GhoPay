@@ -58,15 +58,17 @@ const TxnButton: React.FC<TxnButtonProps> = ({
       className={className}
       disabled={isLoading}
       onClick={() => {
-        try {writeAsync?.()
-          
+        try {
+          writeAsync?.();
         } catch (error) {
           console.log("Error writing to contract:", error);
         }
       }}
       {...buttonProps}
     >
-      <div className="w-full flex items-center justify-center text-center">{buttonText}</div>
+      <div className="w-full flex items-center justify-center text-center m-auto">
+        {buttonText}
+      </div>
       {typeof children === "function" &&
         children({
           data,

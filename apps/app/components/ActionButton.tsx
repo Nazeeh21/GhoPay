@@ -42,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     console.log({ isLoading });
     // (async () => {
     if (txnSuccess && !error) {
-      props.onSuccess?.();
+     props.onSuccess?.();
     }
     // })();
   }, [txnSuccess]);
@@ -70,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
       }}
       buttonLabel={props.buttonLabel}
       writeContractArgs={props.writeContractArgs}
-      className="w-full p-2 text-white bg-gradient-to-r from-[#FC00FF] to-[#00DBDE] bg-gradient-to-r from-[#5C258D] to-[#4389A2] border border-[rgba(255,255,255,0.11)] rounded-[0.5625rem] shadow-[0px 1px 2px rgba(22,22,22,0.12)] transition-transform hover:scale-105 flex justify-center items-center"
+      className="w-full p-2 text-white bg-gradient-to-r from-[#FC00FF] to-[#00DBDE] bg-gradient-to-r from-[#5C258D] to-[#4389A2] border border-[rgba(255,255,255,0.11)] rounded-[0.5625rem] shadow-[0px 1px 2px rgba(22,22,22,0.12)] transition-transform hover:scale-105 flex flex-col justify-center items-center"
     >
       {children}
     </TxnButton>
@@ -148,19 +148,19 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ recipient, amount }) => {
             args: [recipient, amount],
           }}
           buttonLabel="Approve GHO Tokens"
-          onSuccess={() => {
+          onSuccess={async() => {
             setTxnType("approveTxn");
             setTxnSuccess(true);
             console.log("refetching allowance");
-            refetchAllowance();
+            await refetchAllowance();
           }}
         >
           {({ isSuccess, error, isLoading, status }) => {
-            if (isLoading) return "Loading...";
+            // if (isLoading) return "Loading...";
             error && console.error(error?.message);
             return (
               <div className="overflow-y-auto  max-h-20 px-5 pl-10">
-                {status === "loading" && "Loading..."}
+                {/* {status === "loading" && "Loading..."} */}
                 {isSuccess && "Success"}
                 {error && "Error" + error.cause}
               </div>
