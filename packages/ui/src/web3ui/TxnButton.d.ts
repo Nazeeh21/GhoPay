@@ -1,16 +1,17 @@
 import * as React from "react";
-import { UseWriteContractReturnType, type UseWriteContractParameters } from "wagmi";
-import { WriteContractVariables } from "wagmi/query";
-import type { Config } from "@wagmi/core";
-import { Abi } from "viem";
+import { useContractWrite } from "wagmi";
+import { Abi, Address } from "viem";
 import { ButtonProps } from "../shadcnComponents/ui/button";
-export type ContextType<config extends Config = Config, context = unknown> = Omit<UseWriteContractReturnType<config, context>, "writeContract" | "writeContractAsync">;
-export interface TxnButtonProps<config extends Config = Config, context = unknown> extends Omit<ButtonProps, "children"> {
-    writeContractArgs: WriteContractVariables<Abi, string, readonly unknown[], config, config["chains"][number]["id"]>;
-    useWriteContractArgs?: UseWriteContractParameters<config, context>;
+export interface TxnButtonProps extends Omit<ButtonProps, "children"> {
+    writeContractArgs: {
+        abi: Abi;
+        address: Address;
+        functionName: string;
+        args: readonly unknown[];
+    };
     buttonLabel?: string | React.ReactNode;
-    children?: React.ReactNode | ((state: ContextType) => React.ReactNode);
-    onSuccess?: (data?: ContextType) => void;
+    children?: React.ReactNode | ((state: ReturnType<typeof useContractWrite>) => React.ReactNode);
+    onSuccess?: (data?: ReturnType<typeof useContractWrite>["data"]) => void;
 }
 declare const TxnButton: React.FC<TxnButtonProps>;
 export { TxnButton };

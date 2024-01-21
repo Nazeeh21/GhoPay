@@ -4,5 +4,7 @@ interface ActionButtonsProps {
     recipient: Address;
     amount: BigInt;
 }
-export declare const ActionButtons: React.FC<ActionButtonsProps>;
-export {};
+export declare const Spinner: () => JSX.Element;
+export declare const TxnSuccess: () => JSX.Element;
+declare const ActionButtons: React.FC<ActionButtonsProps>;
+export { ActionButtons };
