@@ -88,7 +88,7 @@ export function Modal({ children, ...props }: ModalProps) {
                       </div>
                       <div className="flex w-full items-center justify-between">
                         <div className="text-sm font-medium ">Txn Fees</div>
-                        <div className="text-sm font-medium ">2 GHO</div>
+                        <div className="text-sm font-medium ">4 USD</div>
                       </div>
                       <hr className="h-px w-full bg-gray-200 border-0 dark:bg-gray-700" />
                       <div className="flex w-full items-center justify-between">
