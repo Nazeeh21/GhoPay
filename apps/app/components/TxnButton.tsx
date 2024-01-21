@@ -1,81 +1,98 @@
 import * as React from "react";
-import {
-  UseWriteContractReturnType,
-  useWriteContract,
-  type UseWriteContractParameters,
-} from "wagmi";
-import { WriteContractVariables } from "wagmi/query";
-
-import type { Config } from "@wagmi/core";
-import { Abi } from "viem";
+import { useContractWrite } from "wagmi";
+import { Abi, Address } from "viem";
 import { Button, ButtonProps } from "@/components/ui/button";
+import { Spinner, TxnSuccess } from "./ActionButton";
 
-// context type
-export type ContextType<config extends Config = Config, context = unknown> = Omit<
-  UseWriteContractReturnType<config, context>,
-  "writeContract" | "writeContractAsync"
->;
-
-const TxnButtonContext = React.createContext<ContextType | null>(null);
-
-// interface defined to accept the arguments of useWriteContract and `writeContract` function as a prop
-export interface TxnButtonProps<
-  config extends Config = Config,
-  context = unknown
-> extends Omit<ButtonProps, "children"> {
-  writeContractArgs: WriteContractVariables<
-    Abi,
-    string,
-    readonly unknown[],
-    config,
-    config["chains"][number]["id"]
-  >;
-  useWriteContractArgs?: UseWriteContractParameters<config, context>;
+export interface TxnButtonProps extends Omit<ButtonProps, "children"> {
+  writeContractArgs: {
+    abi: Abi;
+    address: Address;
+    functionName: string;
+    args: readonly unknown[];
+  };
   buttonLabel?: string | React.ReactNode;
-  children?: React.ReactNode | ((state: ContextType) => React.ReactNode);
-  onSuccess?: (data?: ContextType) => void;
+  children?:
+    | React.ReactNode
+    | ((state: ReturnType<typeof useContractWrite>) => React.ReactNode);
+  onSuccess?: (data?: ReturnType<typeof useContractWrite>["data"]) => void;
 }
 
-// TxnButton component
 const TxnButton: React.FC<TxnButtonProps> = ({
   writeContractArgs,
-  useWriteContractArgs,
   className,
   buttonLabel,
   children,
   onSuccess,
   ...buttonProps
 }) => {
-  const { writeContractAsync, ...returnData } =
-    useWriteContract(useWriteContractArgs);
+  const {
+    data,
+    error,
+    isError,
+    isIdle,
+    isLoading,
+    isSuccess,
+    write,
+    writeAsync,
+    reset,
+    status,
+  } = useContractWrite(writeContractArgs);
 
   React.useEffect(() => {
-    if (returnData.isSuccess) {
+    if (isSuccess && data) {
       console.log("success: returning data");
-      onSuccess?.(returnData);
+      onSuccess?.(data);
     }
-  }, [returnData.isSuccess, onSuccess, returnData]);
+  }, [isSuccess, onSuccess, status]);
 
-  const buttonText = returnData.isPending
+  if (isSuccess) {
+    return <TxnSuccess />;
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  const buttonText = isLoading
     ? "Loading..."
-    : returnData.isSuccess
+    : isSuccess
     ? "Success"
-    : returnData.isError
+    : isError
     ? "Error"
     : buttonLabel ?? "Transact";
 
   return (
-    <TxnButtonContext.Provider value={returnData}>
-      <Button
-        className={className}
-        disabled={!writeContractAsync || returnData.isPending}
-        onClick={() => writeContractAsync?.(writeContractArgs)}
-        {...buttonProps}
-      >
+    <Button
+      className={className}
+      disabled={isLoading}
+      onClick={() => {
+        try {
+          writeAsync?.();
+        } catch (error) {
+          console.log("Error writing to contract:", error);
+        }
+      }}
+      {...buttonProps}
+    >
+      <div className="w-full flex items-center justify-center text-center m-auto">
         {buttonText}
-      </Button>
-      {typeof children === "function" && children(returnData)}
-    </TxnButtonContext.Provider>
+      </div>
+      {typeof children === "function" &&
+        children({
+          data,
+          error,
+          isError,
+          isIdle,
+          isLoading,
+          isSuccess,
+          write,
+          reset,
+          status,
+          variables: undefined,
+          writeAsync: undefined,
+        })}
+    </Button>
   );
 };
 

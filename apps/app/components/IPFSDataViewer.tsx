@@ -1,6 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react"; // or your specific import path
-import { config } from "wagmiConfig";
 import { Modal } from "./Modal";
 
 export interface NFTData {
@@ -49,8 +48,7 @@ const IPFSDataViewer = ({ ipfsHash }: { ipfsHash: string }) => {
             </p>
            <div className="mt-3">
            <Modal
-              config={config}
-              amount={BigInt(154000000000000000000)}
+              amount={BigInt(1240)}
               recipient="0x3e57d3c580d0437498215c7C2472B26d39a94C4B"
             />
            </div>
